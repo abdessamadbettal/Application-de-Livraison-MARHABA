@@ -7,6 +7,9 @@
 const Login =  (req, res) => {
     // do something
     // res.status(200).send(req.body);
+    if(req.body.user){
+        res.status(400).send("user name is " + req.body.user)
+    }
     res.status(200).send('this a login function')
 }
 
