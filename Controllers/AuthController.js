@@ -1,7 +1,10 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler')
-const User = require('../Models/UserModel')
+const storage = require('local-storage')
+const db = require('../Models/index')
+const User = db.user;
+const Role = db.role;
 const {resetPasswordEmail , sendConfirmationEmail} = require('../Utils/SendEmail')  
 // const router = require("express").Router();
 
@@ -13,20 +16,29 @@ const {resetPasswordEmail , sendConfirmationEmail} = require('../Utils/SendEmail
 
 
 const Login = asyncHandler (async (req, res) => {
-    console.log(req.body)
+    console.log(req.body)          
     const {email, password} = req.body
     // console.log(req.body)
     const user = await User.findOne({email})
     console.log(user)
     // console.log(user.password)
     if(user  && (await bcrypt.compare(password, user.password)) ){
+        const token = generateToken(user._id)
+        storage('token', token);
+        const role = await Role.findById(user.roles[0])
+        console.log(role)
         if (user.verified == true) {
-            res.json({
-                _id: user._id,
-                name: user.name,
-                email: user.email ,
-                token: generateToken(user._id)
-            })
+            // res.json({
+            //     _id: user._id,
+            //     name: user.name,
+            //     email: user.email ,
+            //     token: generateToken(user._id),
+            //     role: role.name ,
+            //     verified: user.verified ,
+            //     password: user.password ,
+            //     storage: storage('token')
+            // })
+            res.status(200).send( 'bonjour ' + user.name + ' votre role est ' + role.name )
         } else {
             res.status(401)
             throw new Error('User not verified')
@@ -63,7 +75,8 @@ const Register =  asyncHandler (async(req,res) => {
         name,
         email,
         password: hashPassword ,
-        token 
+        token,
+        roles: '6355a36aecb9329d18d55ebf'
     })
     if(newUser){
         if (newUser.verified == false) { 
@@ -165,13 +178,14 @@ const Verify = async  (req,res) => {
 // method : post
 // url : /api/auth/register
 // access : private
-const GetMe =  (req,res) => {
+const Client =  (req,res) => {
     // token = req.params.id
     res.status(200).json({success: true, data: "this is a get me function"})
 }
+
 // generte jwt token
 const generateToken = (id) => {
-    return jwt.sign({id}, process.env.JWT_SECRET, {   
+    return jwt.sign({id}, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRE
     })
 }
@@ -181,8 +195,8 @@ module.exports = {
     Login,
     Register,
     ForgetPassword,
-    ResetPassword ,
-    GetMe ,
+    ResetPassword,
+    Client,
     Verify
 }
     
