@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler')
 const storage = require('local-storage')
 const db = require('../Models/index')
+const cookie = require('cookie-parser')
 const User = db.user;
 const Role = db.role;
 const {resetPasswordEmail , sendConfirmationEmail} = require('../Utils/SendEmail')  
@@ -25,20 +26,26 @@ const Login = asyncHandler (async (req, res) => {
     if(user  && (await bcrypt.compare(password, user.password)) ){
         const token = generateToken(user._id)
         storage('token', token);
+        // set cookie
+        res.cookie('token', token, {
+            expires: new Date(Date.now() + 900000),
+            httpOnly: true
+        })
+
         const role = await Role.findById(user.roles[0])
         console.log(role)
         if (user.verified == true) {
-            // res.json({
-            //     _id: user._id,
-            //     name: user.name,
-            //     email: user.email ,
-            //     token: generateToken(user._id),
-            //     role: role.name ,
-            //     verified: user.verified ,
-            //     password: user.password ,
-            //     storage: storage('token')
-            // })
-            res.status(200).send( 'bonjour ' + user.name + ' votre role est ' + role.name )
+            res.json({
+                _id: user._id,
+                name: user.name,
+                email: user.email ,
+                token: generateToken(user._id),
+                role: role.name ,
+                verified: user.verified ,
+                password: user.password ,
+                storage: storage('token')
+            })
+            // res.status(200).send( 'bonjour ' + user.name + ' votre role est ' + role.name )
         } else {
             res.status(401)
             throw new Error('User not verified')
@@ -178,9 +185,37 @@ const Verify = async  (req,res) => {
 // method : post
 // url : /api/auth/register
 // access : private
-const Client =  (req,res) => {
+const Client = async (req,res) => {
+    // console.log(req.user)
+    const user = req.user
+    const role = await Role.findById(user.roles[0])
+     res.status(200).send( 'bonjour ' + user.name + ' votre role est ' + role.name )
     // token = req.params.id
-    res.status(200).json({success: true, data: "this is a get me function"})
+    // res.status(200).json({success: true, data: "this is a get me function"})
+}
+// method : post
+// url : /api/user/manager
+// access : private
+const Manager = async (req,res) => {
+    // console.log(req.user)
+    const user = req.user
+    const role = await Role.findById(user.roles[0])
+        res.status(200).send( 'bonjour ' + user.name + ' votre role est ' + role.name )
+}
+// method : post
+// url : /api/user/Livreur
+// access : private
+const Livreur = async (req,res) => {
+    // console.log(req.user)
+    const user = req.user
+    const role = await Role.findById(user.roles[0])
+        res.status(200).send( 'bonjour ' + user.name + ' votre role est ' + role.name )
+}
+// Logout
+const Logout = async (req,res) => {
+    //  clear cookie
+    res.clearCookie('token')
+    res.status(200).send('this a logout function')
 }
 
 // generte jwt token
@@ -197,6 +232,9 @@ module.exports = {
     ForgetPassword,
     ResetPassword,
     Client,
-    Verify
+    Manager,
+    Livreur,
+    Verify ,
+    Logout
 }
     

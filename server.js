@@ -2,6 +2,7 @@ require('dotenv').config();
 const colors = require('colors');
 const router = require('./Routes/AuthRoute');
 const role = require('./Routes/userRoute');
+const cookieParser = require('cookie-parser');
 
 // const router = require('./Routes/authRoute')
 
@@ -12,6 +13,7 @@ const app = express();
 // const db = require('./config/Db');
 // const db = require('./Config/Db');
 connectDB();
+app.use(cookieParser());
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
