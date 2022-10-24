@@ -22,7 +22,7 @@ verifyToken = (req, res, next) => {
         console.log(decoded.id)
         const user = await User.findById(decoded.id)
         // const user = User.findById(decoded.id)
-        console.log(user.name)
+        // console.log(user.name)
         // 6355a45f640907b74d14bcba
         if(user){
             req.user = user
@@ -38,7 +38,7 @@ verifyToken = (req, res, next) => {
 
 const isClient = async (req, res, next) => {
     const role = await Role.findById(req.user.roles[0])
-    console.log(role.name)
+    // console.log(role.name)
     if(role.name == 'client'){
         next();
         return;
@@ -49,7 +49,7 @@ const isClient = async (req, res, next) => {
 }
 const isLivreur = async (req, res, next) => {
     const role = await Role.findById(req.user.roles[0])
-    console.log(role.name)
+    // console.log(role.name)
     if(role.name == 'livreur'){
         next();
         return;
@@ -61,7 +61,7 @@ const isLivreur = async (req, res, next) => {
 
 const isManger = async (req, res, next) => {
     const role = await Role.findById(req.user.roles[0])
-    console.log(role.name)
+    // console.log(role.name)
     if(role.name == 'manager'){
         next();
         return;
