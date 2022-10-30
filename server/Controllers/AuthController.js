@@ -93,7 +93,7 @@ const Register =  asyncHandler (async(req,res) => {
                 newUser.token ,
                 newUser.id  
          ); 
-            return res.status(401).send({
+            return res.status(200).send({ 
               message: "Pending Account. Please Verify Your Email!",
             });
           }

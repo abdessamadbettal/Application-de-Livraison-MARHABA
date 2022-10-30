@@ -3,6 +3,7 @@ const colors = require('colors');
 const router = require('./Routes/AuthRoute');
 const role = require('./Routes/userRoute');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 // const router = require('./Routes/authRoute')
 
@@ -14,9 +15,10 @@ const app = express();
 // const db = require('./Config/Db');
 connectDB();
 app.use(cookieParser());
-
+// use cors
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(cors());
 app.use('/api/auth', router);
 app.use('/api/user', role);
  
