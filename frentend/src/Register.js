@@ -34,9 +34,11 @@ export default function Register() {
           };
           axios(configuration)
          .then((result) => {
+            console.log(result.data)
         setRegister(true);
       })
       .catch((error) => {
+        console.log(error);
         error = new Error();
       });
         // prevent the form from refreshing the whole page
