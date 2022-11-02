@@ -4,10 +4,9 @@ import { Container, Col, Row } from "react-bootstrap";
 import "./App.css";
 import Register from "./Register";
 import Login from "./Login";
-import AuthComponent from "./AuthComponent";
-import FreeCompenent from "./FreeCompenent";
+import ForgetPassword from "./ForgetPassword";
+
 // import ProtectedRoutes from "./ProtectedRoutes";
-import Account from "./Account";
 import NotFound from "./NotFound";
 import Home from "./Home";
 function App() {
@@ -35,6 +34,7 @@ function App() {
       <Route  path="/login" element={<Login/>} />
       <Route  path="/register" element={<Register/>} />
       <Route  path="*" element={<NotFound/>} />
+      <Route  path="/forgetpassword" element={<ForgetPassword/>} />
       {/* <ProtectedRoutes path="/auth" component={AuthComponent} /> */}
     </Routes>
   </Container>

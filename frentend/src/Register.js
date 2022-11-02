@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button  } from "react-bootstrap";
+import { Form, Button , Alert  } from "react-bootstrap";
 import { useState } from 'react';
 import axios from "axios";
 // import {handleSubmit} from 'react';
@@ -11,6 +11,7 @@ export default function Register() {
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [register, setRegister] = useState(false); 
+    const [error, setError] = useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -36,19 +37,24 @@ export default function Register() {
          .then((result) => {
             console.log(result.data)
         setRegister(true);
+        setError(null);
       })
       .catch((error) => {
         console.log(error);
+        setError(error.response.data.message);
+        setRegister(false);
         error = new Error();
       });
         // prevent the form from refreshing the whole page
         // make a popup alert showing the "submitted" text
-        alert("Submited");
+        // alert("Submited");
       }
 
     return (
         <>
               <h2>Register</h2>
+              {register && <Alert variant="success">you are register succefily plaise verify your email</Alert>}
+              {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={(e)=>handleSubmit(e)}>
         {/* namr*/}
         <Form.Group controlId="formBasicName">
@@ -78,11 +84,7 @@ export default function Register() {
           Submit
         </Button>
          {/* display success message */}
-         {register ? (
-          <p className="text-success">You Are Registered Successfully</p>
-        ) : (
-          <p className="text-danger">You Are Not Registered</p>
-        )}
+         
 
       </Form>
         </>

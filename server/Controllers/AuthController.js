@@ -120,6 +120,7 @@ const Register =  asyncHandler (async(req,res) => {
 // access : public
 const ForgetPassword = asyncHandler(async (req,res) => {
     const {email} = req.body
+    console.log(email) 
     if(!email ){
         res.status(400)
         throw new Error("Please add a text field")

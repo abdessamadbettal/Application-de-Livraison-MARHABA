@@ -3,6 +3,7 @@ import { Form, Button , Alert  } from "react-bootstrap";
 import { useState } from 'react';
 import axios from "axios";
 import Cookies from "universal-cookie";
+import { Link } from 'react-router-dom';
 const cookies = new Cookies();
 
 
@@ -10,6 +11,7 @@ export default function Login() {
     const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
     // set configurations
@@ -24,34 +26,37 @@ export default function Login() {
         // make the API call
     axios(configuration)
     .then((result) => {
-        console.log(result)
+        console.log(result.data)
       setLogin(true);
     })
     .catch((error) => {
-        console.log(error);
+      setLogin(false);
+      
+      console.log(error);
+      console.log(error.response.data.message);
+      setError(error.response.data.message);
+      // message = error.response.data.message;
       error = new Error();
+      // console.log(error);
     });
 
     // prevent the form from refreshing the whole page
     e.preventDefault();
     // make a popup alert showing the "submitted" text
-    alert("Submited");
+    // alert("Submited");
   }
 
     return (
         <>
               <h2>Login</h2>
               {/* display success message */}
-        {login ? (
-            <Alert variant="success">
-            You Are Logged in Successfully
-            </Alert> 
-        //   <p className="text-success">You Are Logged in Successfully</p>
-        ) : (
-            <Alert variant="danger">
-            You Are Not Logged in
-            </Alert> 
-        )}
+        {error && <Alert variant="danger">{error}</Alert>}
+
+                        {/* (
+                          <Alert variant="danger">
+                          {error}
+                          </Alert> 
+                        ) } */}
 
       <Form onSubmit={(e)=>handleSubmit(e)}>
         {/* email */}
@@ -71,9 +76,14 @@ export default function Login() {
         </Form.Group>
 
         {/* submit button */}
-        <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>
-          Submit
+        <Button variant="danger" className='text m-2' type="submit" onClick={(e) => handleSubmit(e)}>
+          connecter
         </Button>
+        <Link to='/forgetpassword'>
+        <Button variant="danger" className='text m-2' >
+          forget password
+        </Button>
+        </Link>
       </Form>
         </>
     )
