@@ -1,12 +1,12 @@
 import React from 'react' ;
 import { useState } from 'react';
-import { Link } from 'react-router-dom' ;
-import {Form , Button} from 'react-bootstrap' ;
+import {Form , Button  , Alert} from 'react-bootstrap' ;
 import axios from "axios" ;
 
 function ForgetPassword() {
     const [email, setEmail] = useState("");
     const [Forget, setForget] = useState(false);
+    const [error , setError] = useState(null);
 
     const handleSubmit = (e) => {
         // set configurations
@@ -21,9 +21,11 @@ function ForgetPassword() {
         axios(configuration)
         .then((result) => {
             console.log(result)
-          setForget(true);
+            setForget(true);
         })
         .catch((error) => {
+            setForget(false);
+            setError(error.response.data.message)
             console.log(error);
           error = new Error();
         });
@@ -31,7 +33,7 @@ function ForgetPassword() {
         // prevent the form from refreshing the whole page
         e.preventDefault();
         // make a popup alert showing the "submitted" text
-        alert("Submited");
+        // alert("Submited");
       }
 
 
@@ -39,9 +41,13 @@ function ForgetPassword() {
   return (
     <div>
         
-      <h1>ForgetPassword</h1>  
+      <h1>ForgetPassword</h1> 
+
+        {Forget && <Alert variant="success">plaise virefy your email for resset password</Alert>} 
+        {error && <Alert variant="danger">{error}</Alert>} 
 
           <Form onSubmit={(e)=>handleSubmit(e)}>
+
         {/* email */}
         <Form.Group controlId="formBasicEmail">
           <Form.Label>plaise entrer your Email address</Form.Label>

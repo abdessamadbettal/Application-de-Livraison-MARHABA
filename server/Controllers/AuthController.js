@@ -127,6 +127,7 @@ const ForgetPassword = asyncHandler(async (req,res) => {
     } 
     const user = await User.findOne({email})
     if(user){
+        console.log(' sssssssss:>> '); 
         const token = generateToken(user._id)
         user.token = token
         user.save()

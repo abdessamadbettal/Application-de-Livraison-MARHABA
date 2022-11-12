@@ -48,18 +48,37 @@ export default function Login() {
 
     return (
         <>
-              <h2>Login</h2>
-              {/* display success message */}
+
+                            <div className="login-form-box">
+            <h3 className="mb-30">Login</h3>
+            <form className="login-form" action="#">
+                <div className="input-box mb--30">
+                    <input type="text" placeholder="Username or Email" />
+                </div>
+                <div className="input-box mb--30">
+                    <input type="password" placeholder="Password" />
+                </div>
+                <div className="comment-form-consent input-box mb--30">
+                    <input id="checkbox-1" type="checkbox" />
+                    <label htmlFor="checkbox-1">Remember Me</label>
+                </div>
+                <button className="rn-btn edu-btn w-100 mb--30" type="submit">
+                    <span>Login</span>
+                </button>
+                <div className="input-box">
+                    <a href="#" className="lost-password">Lost your password?</a>
+                </div>
+            </form>
+        </div>
+                            
+              {/* <h2>Login</h2>
+             
         {error && <Alert variant="danger">{error}</Alert>}
 
-                        {/* (
-                          <Alert variant="danger">
-                          {error}
-                          </Alert> 
-                        ) } */}
+                       
 
       <Form onSubmit={(e)=>handleSubmit(e)}>
-        {/* email */}
+
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" name='email' value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
@@ -69,13 +88,12 @@ export default function Login() {
        
        
 
-        {/* password */}
+      
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" name='password' value={password} placeholder="Password"  onChange={(e) => setPassword(e.target.value)} />
         </Form.Group>
 
-        {/* submit button */}
         <Button variant="danger" className='text m-2' type="submit" onClick={(e) => handleSubmit(e)}>
           connecter
         </Button>
@@ -84,7 +102,7 @@ export default function Login() {
           forget password
         </Button>
         </Link>
-      </Form>
+      </Form> */}
         </>
     )
 }

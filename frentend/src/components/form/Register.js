@@ -52,17 +52,41 @@ export default function Register() {
 
     return (
         <>
-              <h2>Register</h2>
+
+                            <div className="login-form-box">
+            <h3 className="mb-30">Register</h3>
+            <form className="login-form" action="#">
+                <div className="input-box mb--30">
+                    <input type="text" placeholder="Full Name" />
+                </div>
+                <div className="input-box mb--30">
+                    <input type="email" placeholder="Email" />
+                </div>
+                <div className="input-box mb--30">
+                    <input type="password" placeholder="Password" />
+                </div>
+                <div className="input-box  mb--30 ">
+                    <input id="checkbox-2" type="checkbox" />
+                    <label htmlFor="checkbox-2">I read & agree the terms & conditions.</label>
+                </div>
+                <button className="rn-btn edu-btn w-100" type="submit">
+                    <span>Register</span>
+                </button>
+            </form>
+        </div>
+                          
+       
+              {/* <h2>Register</h2>
               {register && <Alert variant="success">you are register succefily plaise verify your email</Alert>}
               {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={(e)=>handleSubmit(e)}>
-        {/* namr*/}
+    
         <Form.Group controlId="formBasicName">
           <Form.Label>your name</Form.Label>
           <Form.Control type="text" name='name' value={name} placeholder="Enter you name" onChange={(e) => setName(e.target.value)} />
         </Form.Group>
 
-        {/* email */}
+     
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" name='email' value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
@@ -73,20 +97,20 @@ export default function Register() {
        
        
 
-        {/* password */}
+        
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" name='password' value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
         </Form.Group>
 
-        {/* submit button */}
+       
         <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>
           Submit
         </Button>
-         {/* display success message */}
+       
          
 
-      </Form>
+      </Form> */}
         </>
     )
 }
