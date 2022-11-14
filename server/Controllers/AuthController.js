@@ -215,6 +215,7 @@ const Livreur = async (req,res) => {
 }
 // Logout
 const Logout = async (req,res) => {
+    // console.log('logout') ;
     //  clear cookie
     res.clearCookie('token')
     res.status(200).send('this a logout function')

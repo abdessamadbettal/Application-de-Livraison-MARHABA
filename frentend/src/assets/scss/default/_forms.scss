@@ -329,6 +329,27 @@ input[type="submit"] {
         }
         .lost-password {
             color: var(--color-secondary);
+            font-size: medium;
+            font-weight: 500;
         }
     }
+}
+.nav-justified {
+    background-color: #f5f5f5;
+    border-radius: 6px;
+    margin-top: 10px;
+    > li {
+        > a {
+            padding: 10px 50px;
+            border-radius: 6px;
+            color: var(--color-body);
+            font-size: 16px;
+            font-weight: 500;
+            // text-transform: capitalize;
+            &:hover {
+                color: var(--color-primary);
+            }
+        }
+    }
+    
 }

@@ -1,20 +1,20 @@
 import React from 'react' ;
-import Layout from '../common/Layout' ;
+// import Layout from '../common/Layout' ;
 import Breadcrumb from '../common/breadcrumb/Breadcrumb';
-import Login from '../components/form/Login';
-import Register from '../components/form/Register';
+// import Login from '../components/form/Login';
+// import Register from '../components/form/Register';
 // import link
 // import { Link } from 'react-router-dom';
 
 // import { NavLink } from 'react-router-dom';
 import { NavLink , Outlet} from "react-router-dom";
-import Nav from 'react-bootstrap/Nav';
+// import Nav from 'react-bootstrap/Nav';
 
 
 const LoginRegister = () => {
  
   return (
-    <Layout>
+    <>
          <Breadcrumb 
                     title="Login & Register"
                     rootUrl="/"
@@ -26,11 +26,11 @@ const LoginRegister = () => {
                   
                 
                               <ul className="nav nav-pills nav-justified mb-3 " id="ex1" role="tablist">
-                            <li className="nav-item me-3" role="presentation">
-                              <NavLink to="/loginregister/login" className="nav-link " end>Login</NavLink>
+                            <li className="nav-item me-3 ms-3" role="presentation">
+                              <NavLink to="/login-register/login" className="nav-link " end>Login</NavLink>
                             </li>
                             <li className="nav-item" role="presentation">
-                              <NavLink to="/loginregister/register" className="nav-link"  end>Register</NavLink>
+                              <NavLink to="/login-register/register" className="nav-link"  end>Register</NavLink>
                             </li>
                           </ul>
 
@@ -47,7 +47,7 @@ const LoginRegister = () => {
                        </div>
                    </div>
                 
-    </Layout>
+    </>
   )
 }
 

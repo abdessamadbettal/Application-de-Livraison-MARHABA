@@ -1,6 +1,6 @@
 import React from 'react'
-import { Form, Button , Alert  } from "react-bootstrap";
 import { useState } from 'react';
+import { Alert } from "react-bootstrap";
 import axios from "axios";
 // import {handleSubmit} from 'react';
 
@@ -23,7 +23,7 @@ export default function Register() {
             // });
             // const name = "abdo";
         const configuration = 
-         {
+         { 
             method: "post",
             url: "http://localhost:8000/api/auth/register",
             data: {
@@ -55,21 +55,22 @@ export default function Register() {
 
                             <div className="login-form-box">
             <h3 className="mb-30">Register</h3>
-            <form className="login-form" action="#">
+            {error && <Alert variant="danger">{error}</Alert>}
+            <form className="login-form" onSubmit={(e)=>handleSubmit(e)}>
                 <div className="input-box mb--30">
-                    <input type="text" placeholder="Full Name" />
+                    <input type="text" name='name' value={name} placeholder="Full name" onChange={(e) => setName(e.target.value)} />
                 </div>
                 <div className="input-box mb--30">
-                    <input type="email" placeholder="Email" />
+                    <input type="email" name='email' value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)}  />
                 </div>
                 <div className="input-box mb--30">
-                    <input type="password" placeholder="Password" />
+                    <input type="password" name='password' value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div className="input-box  mb--30 ">
                     <input id="checkbox-2" type="checkbox" />
                     <label htmlFor="checkbox-2">I read & agree the terms & conditions.</label>
                 </div>
-                <button className="rn-btn edu-btn w-100" type="submit">
+                <button className="rn-btn edu-btn w-100" type="submit" onClick={(e) => handleSubmit(e)}>
                     <span>Register</span>
                 </button>
             </form>

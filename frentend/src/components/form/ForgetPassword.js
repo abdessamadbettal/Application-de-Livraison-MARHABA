@@ -1,6 +1,5 @@
 import React from 'react' ;
 import { useState } from 'react';
-import {Form , Button  , Alert} from 'react-bootstrap' ;
 import axios from "axios" ;
 
 function ForgetPassword() {
@@ -39,28 +38,20 @@ function ForgetPassword() {
 
 
   return (
-    <div>
-        
-      <h1>ForgetPassword</h1> 
 
-        {Forget && <Alert variant="success">plaise virefy your email for resset password</Alert>} 
-        {error && <Alert variant="danger">{error}</Alert>} 
-
-          <Form onSubmit={(e)=>handleSubmit(e)}>
-
-        {/* email */}
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>plaise entrer your Email address</Form.Label>
-          <Form.Control type="email" name='email' value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
-        </Form.Group>  
-
-        {/* submit button */}
-        <Button variant="danger" className='text m-2' type="submit" onClick={(e) => handleSubmit(e)}>
-          envoyer
-        </Button>
-        </Form>
-        
+    <div className="login-form-box">
+            <h3 className="mb-30">mot de passe oublier</h3>
+            <form className="login-form" onSubmit={(e)=>handleSubmit(e)}>
+                <div className="input-box mb--30">
+                    <input type="email" name='email' value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
+                </div>
+                
+                <button className="rn-btn edu-btn w-100 mb--30" type="submit" onClick={(e) => handleSubmit(e)}>
+                    <span>Envoyer</span>
+                </button>
+            </form>
         </div>
+   
   )
 }
 

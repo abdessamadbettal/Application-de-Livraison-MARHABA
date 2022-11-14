@@ -1,8 +1,11 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link , Navigate } from 'react-router-dom';
 import Nav from './Nav';
 import HeaderSticky from './HeaderSticky';
 import ResponsiveMenu from './ResponsiveMenu';
+import axios from 'axios' ;
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const Header = ( { styles, disableSticky } ) => {
     const [offcanvasShow, setOffcanvasShow] = useState( false );
@@ -14,6 +17,29 @@ const Header = ( { styles, disableSticky } ) => {
     const onSearchHandler = () => {
         setSearchPopup( prevState => ! prevState );
     }
+    
+    const Logout = () => {
+       
+        const configuration = {
+            method: "get",
+            url: "http://localhost:8000/api/auth/logout",
+            headers: {
+                Authorization: `Bearer ${cookies.get("TOKEN")}`,
+            },
+        };
+        axios(configuration)
+        .then((result) => {
+            console.log(result.data)
+            cookies.remove("TOKEN", {
+                path: "/",
+            })
+            console.log(cookies.get("TOKEN")); // undefined
+          return <Navigate to='http://localhost:3000/' /> ;
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+      }
 
     if ( searchPopup ) {
         document.body.classList.add( 'search-popup-active' );
@@ -49,9 +75,23 @@ const Header = ( { styles, disableSticky } ) => {
                                     <div className="quote-icon quote-search">
                                         <button className="search-trigger" onClick={ onSearchHandler }><i className="ri-search-line"></i></button>
                                     </div>
+                                    {/* if user is connect affiche logout */}
+                                    {cookies.get("TOKEN") ? (
+                                        <>
+                                        <div className="quote-icon quote-user">
+                                            <Link to={process.env.PUBLIC_URL + "/profile"}><i className="ri-user-settings-line"></i></Link>
+                                        </div>
+                                        <div className="quote-icon quote-user">
+                                            <Link  to={process.env.PUBLIC_URL + "/logout"} onClick={() => Logout()}><i className="ri-logout-box-line"></i></Link>
+                                        </div>
+                                        </>
+                                    ) : (
                                     <div className="quote-icon quote-user">
-                                        <Link to={process.env.PUBLIC_URL + "/login-register"}><i className="ri-user-line"></i></Link>
-                                    </div>
+                                    <Link to={process.env.PUBLIC_URL + "/login-register/login"}><i className="ri-user-line"></i></Link>
+                                </div>
+                                    )}
+                                    
+                                    
                                     <div className="hamberger quote-icon d-block d-xl-none">
                                         <button className="hamberger-button" onClick={ onCanvasHandler }>
                                             <i className="ri-menu-line"></i>
