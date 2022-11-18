@@ -33,8 +33,13 @@ const Header = ( { styles, disableSticky } ) => {
             cookies.remove("TOKEN", {
                 path: "/",
             })
-            console.log(cookies.get("TOKEN")); // undefined
-          return <Navigate to='http://localhost:3000/' /> ;
+            // alert('goood') ;
+            // alert(cookies.get("TOKEN")); // undefined
+            // return <Navigate to="/" />;
+        
+           
+
+        window.location.href = "/";
         })
         .catch((error) => {
             console.log(error);

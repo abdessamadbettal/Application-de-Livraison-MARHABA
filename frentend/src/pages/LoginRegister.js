@@ -1,14 +1,6 @@
 import React from 'react' ;
-// import Layout from '../common/Layout' ;
 import Breadcrumb from '../common/breadcrumb/Breadcrumb';
-// import Login from '../components/form/Login';
-// import Register from '../components/form/Register';
-// import link
-// import { Link } from 'react-router-dom';
-
-// import { NavLink } from 'react-router-dom';
 import { NavLink , Outlet} from "react-router-dom";
-// import Nav from 'react-bootstrap/Nav';
 
 
 const LoginRegister = () => {
@@ -22,7 +14,7 @@ const LoginRegister = () => {
                     currentUrl="Login & Register"
                 />
                 
-                <div className='d-flex justify-content-center'>
+                {/* <div className='d-flex justify-content-center'>
                   
                 
                               <ul className="nav nav-pills nav-justified mb-3 " id="ex1" role="tablist">
@@ -34,7 +26,7 @@ const LoginRegister = () => {
                             </li>
                           </ul>
 
-                </div>
+                </div> */}
                 <div className="login-register-page-wrapper edu-section-gap bg-color-white">
                     <div className="container checkout-page-style">
                         <div className="row ">

@@ -7,7 +7,6 @@ const cookie = require('cookie-parser')
 const User = db.user;
 const Role = db.role;
 const {resetPasswordEmail , sendConfirmationEmail} = require('../Utils/SendEmail')  
-// const router = require("express").Router();
 
 
 // method : post
@@ -19,14 +18,11 @@ const {resetPasswordEmail , sendConfirmationEmail} = require('../Utils/SendEmail
 const Login = asyncHandler (async (req, res) => {
     console.log(req.body)          
     const {email, password} = req.body
-    // console.log(req.body)
     const user = await User.findOne({email})
     console.log(user)
-    // console.log(user.password)
     if(user  && (await bcrypt.compare(password, user.password)) ){
         const token = generateToken(user._id)
         storage('token', token);
-        // set cookie
         res.cookie('token', token, {
             expires: new Date(Date.now() + 900000),
             httpOnly: true
@@ -45,7 +41,6 @@ const Login = asyncHandler (async (req, res) => {
                 password: user.password ,
                 storage: storage('token')
             })
-            // res.status(200).send( 'bonjour ' + user.name + ' votre role est ' + role.name )
         } else {
             res.status(401)
             throw new Error('User not verified')
@@ -72,7 +67,7 @@ const Register =  asyncHandler (async(req,res) => {
     const user = await User.findOne({email})
     if(user){
         res.status(400)
-        throw new Error("User already exist")
+        throw new Error("Email already exist")
     } 
     const salt = await bcrypt.genSalt(10)
     const hashPassword = await bcrypt.hash(password, salt)
@@ -97,8 +92,6 @@ const Register =  asyncHandler (async(req,res) => {
               message: "Pending Account. Please Verify Your Email!",
             });
           }
-        // const url = `${process.env.BASE_URL}api/auth/verify/${token}`
-        // await sendEmail(newUser.email, "Verify your email address", url)
         res.status(201).json({
             _id: newUser._id,
             name: newUser.name,
@@ -106,28 +99,24 @@ const Register =  asyncHandler (async(req,res) => {
             verified : newUser.verified,
             token: token ,
             message: "User created successfully ... plaise verify your email"
-
-            // token: generateToken(newUser._id)
         })
     } else {
         res.status(400)
         throw new Error("Invalid user data")
     }
-    // res.status(200).send('this a register function')
 })
 // method : post
 // url : /api/auth/
 // access : public
 const ForgetPassword = asyncHandler(async (req,res) => {
     const {email} = req.body
-    console.log(email) 
+    console.log(req.body) 
     if(!email ){
         res.status(400)
         throw new Error("Please add a text field")
     } 
     const user = await User.findOne({email})
     if(user){
-        console.log(' sssssssss:>> '); 
         const token = generateToken(user._id)
         user.token = token
         user.save()
@@ -156,39 +145,38 @@ const ResetPassword = asyncHandler(async (req,res) => {
         res.status(400)
         throw new Error("password not match")
     }
+    console.log('req.body :>> ', req.body);
+    console.log('token :>> ', token);
     const user = await User.findOne({token})
     if(user){
-        const salt = await bcrypt.genSalt(10)
+        const salt = await bcrypt.genSalt(10) 
         const hashPassword = await bcrypt.hash(password, salt)
         user.password = hashPassword
         user.save()
         res.status(200).send('your password is reset')
+        console.log(user)
     }else{
         res.status(400).send('token not valid') 
-    }
-
-
-    res.status(200).send('this a reset Password function of'+ req.params.token)
+    }  
 }) 
-const Verify = async  (req,res) => {
-    const token = req.params.token
-    const id = req.params.id
-    const user = await User.findById(id) 
-    if(user.verified == false  && user.token == token){
-        user.verified = true
+const Verify = asyncHandler( async  (req,res) => {
+    let token = req.params.token
+    
+    const user = await User.findOne({token})
+    console.log('user :>> ' , user);
+    if(user){
+        user.verified = true ;
         user.save()
         res.status(200).send('your account is verified')
     }else{
         res.status(400).send('token not valid')
     }
-    
-    // res.status(200).send('this a reset verfy function of'+ req.params.token +"and id = "+ id)
-} 
+} ) 
 // method : post
 // url : /api/auth/register
 // access : private
 const Client = async (req,res) => {
-    // console.log(req.user)
+    // console.log(req.user) 
     const user = req.user
     const role = await Role.findById(user.roles[0])
      res.status(200).send( 'bonjour ' + user.name + ' votre role est ' + role.name )
@@ -199,7 +187,7 @@ const Client = async (req,res) => {
 // url : /api/user/manager
 // access : private
 const Manager = async (req,res) => {
-    // console.log(req.user)
+    // console.log(req.user) 
     const user = req.user
     const role = await Role.findById(user.roles[0])
         res.status(200).send( 'bonjour ' + user.name + ' votre role est ' + role.name )
@@ -215,8 +203,6 @@ const Livreur = async (req,res) => {
 }
 // Logout
 const Logout = async (req,res) => {
-    // console.log('logout') ;
-    //  clear cookie
     res.clearCookie('token')
     res.status(200).send('this a logout function')
 }

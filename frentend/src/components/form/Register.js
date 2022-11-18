@@ -1,117 +1,104 @@
-import React from 'react'
-import { useState } from 'react';
 import { Alert } from "react-bootstrap";
-import axios from "axios";
-// import {handleSubmit} from 'react';
-
+import React, { useEffect , useState } from "react";
+import { Lang, useFormInputValidation } from "react-form-input-validation";
+import { Link } from "react-router-dom";
+import axios  from "axios";
 
 export default function Register() {
-   
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
-    const [name, setName] = useState("");
-    const [register, setRegister] = useState(false); 
-    const [error, setError] = useState(null);
+      const [error, setError] = useState(null);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // e.preventDefault();
-        // const user = { email, password , name};
-        // axios.post("http://localhost:8000/api/auth/register", user).then((res) => {
-            //     console.log(res);
-            //     setRegister(true);
-            // });
-            // const name = "abdo";
-        const configuration = 
-         { 
-            method: "post",
-            url: "http://localhost:8000/api/auth/register",
-            data: {
-              email,
-              password,
-              name ,
-            },
-            config: { headers: {'Content-Type': 'multipart/form-data' }}
-          };
-          axios(configuration)
-         .then((result) => {
-            console.log(result.data)
-        setRegister(true);
-        setError(null);
-      })
-      .catch((error) => {
-        console.log(error);
-        setError(error.response.data.message);
-        setRegister(false);
-        error = new Error();
+      const [fields, errors, form] = useFormInputValidation({
+        name: "" ,
+        email: "",
+        password: "" ,
+        password_confirmation: "" 
+      }, {
+        name: "required",
+        email: "required|email",
+        password: "required|min:8|confirmed",
+        password_confirmation: "required|min:8|same:password",
       });
-        // prevent the form from refreshing the whole page
-        // make a popup alert showing the "submitted" text
-        // alert("Submited");
-      }
+
+      form.useLang(Lang.en);
+
+  const onSubmit = async (event) => {
+    console.log("onSubmit" );
+    const isValid = await form.validate(event);
+    console.log('isValid', isValid)
+    if (isValid) {
+      console.log("MAKE AN API CALL");
+      console.log("MAKE AN API CALL", fields, errors);
+      console.log(fields.email)
+      const name = fields.name ;
+      const email = fields.email ;
+      const password = fields.password ;
+           // set configurations
+              const configuration = {
+                  method: "post",
+                  url: "http://localhost:8000/api/auth/register",
+                  data: {
+                    name,
+                    email,
+                    password,
+                  },
+                };
+                  // make the API call
+              axios(configuration)
+              .then((result) => {
+                  console.log(result.data)
+                setError(false);
+                // window.location.href = "/login-register/login";
+              })
+              .catch((error) => {
+                // setLogin(false);
+                
+                console.log(error);
+                console.log(error.response.data.message);
+                setError(error.response.data.message);
+                // message = error.response.data.message;
+                error = new Error();
+              });
+    }
+  };
+     
 
     return (
-        <>
+     
 
-                            <div className="login-form-box">
-            <h3 className="mb-30">Register</h3>
+        <div className="login-form-box">
+            <h3 className="pb-3 fw-bold fs-1">S'inscrire</h3>
             {error && <Alert variant="danger">{error}</Alert>}
-            <form className="login-form" onSubmit={(e)=>handleSubmit(e)}>
+            {error === false && <Alert variant="success">plaise verify your email</Alert>}
+            <form className="login-form" noValidate autoComplete="off" onSubmit={onSubmit}>
                 <div className="input-box mb--30">
-                    <input type="text" name='name' value={name} placeholder="Full name" onChange={(e) => setName(e.target.value)} />
+                    <label className="text-danger">{errors.name ? errors.name : ""}</label>
+                    <input type="ame" name='name'  onBlur={form.handleBlurEvent}  onChange={form.handleChangeEvent} value={fields.name} placeholder="Full name" />
                 </div>
                 <div className="input-box mb--30">
-                    <input type="email" name='email' value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)}  />
+                    <label className="text-danger">{errors.email ? errors.email : ""}</label>
+                    <input type="email" name='email'  onBlur={form.handleBlurEvent}  onChange={form.handleChangeEvent} value={fields.email} placeholder="Username or Email" />
                 </div>
                 <div className="input-box mb--30">
-                    <input type="password" name='password' value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                    <div className="text-danger">{errors.password ? errors.password : ""}</div>
+                    <input type="password" name='password'  onBlur={form.handleBlurEvent}  onChange={form.handleChangeEvent} value={fields.password} placeholder="Password" />
                 </div>
-                <div className="input-box  mb--30 ">
+                <div className="input-box mb--30">
+                    <div className="text-danger">{errors.password_confirmation ? errors.password_confirmation : ""}</div>
+                    <input type="password" name='password_confirmation'  onBlur={form.handleBlurEvent}  onChange={form.handleChangeEvent} value={fields.password_confirmation} placeholder="Password" />
+                </div>
+                {/* <div className="input-box  mb--30 ">
                     <input id="checkbox-2" type="checkbox" />
                     <label htmlFor="checkbox-2">I read & agree the terms & conditions.</label>
-                </div>
-                <button className="rn-btn edu-btn w-100" type="submit" onClick={(e) => handleSubmit(e)}>
+                </div> */}
+                <button className="rn-btn edu-btn w-100" type="submit" >
                     <span>Register</span>
                 </button>
+                <div className="d-flex align-items-center justify-content-center pt-4">
+                    <p className="mb-0 me-2">Do you have an account?</p>
+                    <Link to="/login-register/login" className="text-black-50 fw-bold">connecter</Link>
+                    {/* <Link to="/login-register/register"><button type="button" className="btn btn-outline-danger">Create new</button></Link> */}
+                  </div>
             </form>
         </div>
-                          
-       
-              {/* <h2>Register</h2>
-              {register && <Alert variant="success">you are register succefily plaise verify your email</Alert>}
-              {error && <Alert variant="danger">{error}</Alert>}
-              <Form onSubmit={(e)=>handleSubmit(e)}>
-    
-        <Form.Group controlId="formBasicName">
-          <Form.Label>your name</Form.Label>
-          <Form.Control type="text" name='name' value={name} placeholder="Enter you name" onChange={(e) => setName(e.target.value)} />
-        </Form.Group>
-
-     
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" name='email' value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
-        </Form.Group>
-
-    
-
-       
-       
-
-        
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" name='password' value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-        </Form.Group>
-
-       
-        <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>
-          Submit
-        </Button>
-       
-         
-
-      </Form> */}
-        </>
     )
 }

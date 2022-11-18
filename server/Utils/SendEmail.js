@@ -16,7 +16,7 @@ const transport = nodemailer.createTransport({
     pass: process.env.EMAIL_PASS
   },
 })
-const sendConfirmationEmail = (name, email, confirmationCode , userId) => {
+const sendConfirmationEmail = (name, email, confirmationCode ) => {
     console.log("Check");
     transport.sendMail({
       from: user,
@@ -25,7 +25,7 @@ const sendConfirmationEmail = (name, email, confirmationCode , userId) => {
       html: `<h1>Email Confirmation</h1>   
           <h2>Hello ${name}</h2>
           <p>Thank you for subscribing. Please confirm your email by clicking on the following link</p>
-          <a href=http://localhost:8000/api/auth/user/${userId}/confirm/${confirmationCode}> Verifier your email</a>
+          <a href=http://localhost:3000/login-register/confirm/${confirmationCode}> Verifier your email</a>
           </div>`,
     }).catch(err => console.log(err));
 }
@@ -38,7 +38,7 @@ const resetPasswordEmail = (name, email, token ) => {
         html: `<h1>RESET PASSWORD</h1>
             <h2>Hello ${name}</h2>
             <p>plaise n'oblier pas le code the next time</p>
-            <a href=http://localhost:8000/api/auth/resetpassword/${token}> Reset pasword</a>
+            <a href=http://localhost:3000/login-register/resetpassword/${token}> Reset pasword</a>
             </div>`,  
     }).catch(err => console.log(err));
 }
