@@ -4,7 +4,7 @@ import Category from './Category';
 
 const SpecialiteCategory = () => {
   return (
-    <div className="sercice-area eduvibe-service-four edu-section-gap bg-color-white">
+    <div className="sercice-area eduvibe-service-four edu-section-gap bg-color-white pt-5">
             <div className="container eduvibe-animated-shape">
                 <div className="row">
                     <div className="col-lg-12">

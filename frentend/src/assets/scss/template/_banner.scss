@@ -669,10 +669,10 @@
         @media #{$sm-layout} {
             left: 0;
             margin: 0 auto;
-            padding: 30px;
+            padding: 0px;
         }
         @media #{$large-mobile} {
-            padding: 20px;
+            padding: 0px;
         }
         .thumbnail {
             img {
@@ -731,7 +731,7 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             font-weight: 800;
-            font-size: 16px;
+            font-size: 15px;
             line-height: 26px;
             color: var(--color-primary);
             display: block;
@@ -743,13 +743,13 @@
             line-height: 1.25;
             margin-bottom: 25px;
             @media #{$lg-layout} {
-                font-size: 50px;
+                font-size: 30px;
             }
             @media #{$md-layout} {
                 font-size: 40px;
             }
             @media #{$sm-layout} {
-                font-size: 40px;
+                font-size: 30px;
             }
         }
 

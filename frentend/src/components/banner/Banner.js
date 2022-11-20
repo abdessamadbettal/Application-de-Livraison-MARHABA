@@ -6,13 +6,13 @@ const Banner = () => {
         <div className="slider-area banner-style-4 bg-image">
             <div className="wrapper d-flex align-items-center home-four-banner-wrapper">
                 <div className="container eduvibe-animated-shape">
-                    <div className="row g-5 align-items-center">
+                    <div className="row g-3 align-items-center pt-4">
                         <div className="col-lg-6 order-2 order-lg-1">
                             <div className="inner mt_md--10 mt_sm--10">
                                 <div className="content text-start">
-                                    <span className="pre-title">plateforme de partage en ligne pour les étudiants et les profs</span>
-                                    <h1 className="title">Telecharger vos documents en un seul click</h1>
-                                    <p className="description">Trouver tous les cours , TP ,TD , Exmens de tous les specialitées</p>
+                                    <span className="pre-title">Telecharger vos documents gratuit</span>
+                                    <h1 className="title">materiel d'etudes en un seul click</h1>
+                                    <p className="description"> cours, TP , TD, Exmens, supports</p>
                                     {/* <div className="read-more-btn">
                                         <Link className="edu-btn" to="#">Get Started Today <i className="icon-arrow-right-line-right"></i></Link>
                                     </div> */}
@@ -21,8 +21,8 @@ const Banner = () => {
                         </div>
                         <div className="col-lg-6 order-1 order-lg-2">
                             <div className="banner-image">
-                                <div className="thumbnail">
-                                    <img src="/images/banner/food.svg" alt="Banner Images" />
+                                <div className="">
+                                    <img src="/images/banner/bg.png"  alt="Banner Images" />
                                 </div>
                                 {/* <div className="round-images">
                                     <img src="/images/banner/banner-06/jami3a.png" alt="Shape Images" />
