@@ -11,8 +11,8 @@ const Home = () => {
     <>
         <Banner/>
         <SpecialiteCategory />
-        <AboutCout wrapperClass="edu-section-gapBottom"/>
         <CallToPublier />
+        <AboutCout wrapperClass="edu-section-gapBottom"/>
 
     </>
   )

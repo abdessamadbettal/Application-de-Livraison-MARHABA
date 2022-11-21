@@ -23,6 +23,7 @@ const Nav = () => {
                 <Link to="#">specialites</Link>
                 <ul className="submenu">
                     <li><Link to="/economie/cours-exmens-td-tp">Economie</Link></li>
+                    <li><Link to="/biologie/cours-exmens-td-tp">Biologie</Link></li>
                     <li><Link to="/etudes%20anglaises/cours">etudes anglais</Link></li>
                     <li><Link to="/geographie/cours-exmens-td-tp">geographie</Link></li>
                     <li><Link to="/course-jami3a">Course jami3a</Link></li>

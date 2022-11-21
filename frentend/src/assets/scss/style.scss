@@ -43,9 +43,9 @@
 @import 'elements/event';
 @import 'elements/team';
 @import 'elements/service';
+@import 'elements/sidebar';
 @import 'elements/single-elements';
 @import 'elements/coursesidebar';
-@import 'elements/sidebar';
 @import 'elements/testimonial';
 @import 'elements/feature';
 @import 'elements/about';
@@ -78,13 +78,13 @@
 
 
 
-// /**************************************
-//     Blog Styles
-// ***************************************/
-// @import 'blog/blog-grid';
-// @import 'blog/sidebar';
-// @import 'blog/blog-details';
-// @import 'blog/comments';
+/**************************************
+    Blog Styles
+***************************************/
+@import 'blog/blog-grid';
+@import 'blog/sidebar';
+@import 'blog/blog-details';
+@import 'blog/comments';
 
 /**************************************
     Template Styles
@@ -101,4 +101,3 @@
 ***************************************/
 @import 'footer/footer';
 @import 'footer/copyright';
-
