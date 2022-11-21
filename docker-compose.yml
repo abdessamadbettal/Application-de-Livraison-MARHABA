@@ -1,0 +1,11 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  api:
+    image: node:18.12.1
+    container_name: api
+    workding_dir: /app
+    command: npm run server
+    ports:
+      - "5000:5000"
+    volumes:
+      - "./server/:/app"

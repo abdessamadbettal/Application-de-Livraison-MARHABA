@@ -17,9 +17,9 @@ const PdfInfo = ({ data, classes, bgWhite }) => {
     >
       <div className="inner">
         <div className="thumbnail"> 
-          <Link to={process.env.PUBLIC_URL + `/course-details/${data.id}`}>
+          <Link to={process.env.PUBLIC_URL + `/course-details/${data.id}`} >
             <img 
-              className="w-100" 
+              // className="w-100" 
               src={`${process.env.PUBLIC_URL}/images/pdfimg/test.jpg`}
             //   src={`${process.env.PUBLIC_URL}/images/course/course-01/${data.image}`}
               alt="Course Thumb"
@@ -38,22 +38,23 @@ const PdfInfo = ({ data, classes, bgWhite }) => {
         </div>
         <div className="content">
           <div className="card-top d-none d-md-block">
-            {/* <div className="author-meta">
+            <div className="author-meta">
               <div className="author-thumb">
                 <Link
                   to={
                     process.env.PUBLIC_URL +
-                    `/instructor-details/${slugify(data.instructor)}`
+                    `/instructor-details/`
                   }
+                  className='text-decoration-none'
                 >
                   <img
-                    src={`${process.env.PUBLIC_URL}/images/instructor/instructor-small/professor.png`}
+                    src={`${process.env.PUBLIC_URL}/images/course/professor.png`}
                     alt="Author Thumb"
                   />
-                  <span className="author-title">{data.instructor}</span>
+                  <span className="author-title">mohamed dahbi</span>
                 </Link>
               </div>
-            </div> */}
+            </div>
           </div>
             <h6 className="title fw-bold h6 ">
               <Link to={process.env.PUBLIC_URL + `/course-details/${data.id}`} className="text-decoration-none">
@@ -77,7 +78,11 @@ const PdfInfo = ({ data, classes, bgWhite }) => {
           <ul className="edu-meta meta-03">
             <li className="meta-lessons">
               <i className="icon-file-list-4-line"></i>
-              {data.durationInHour}
+              {data.level}
+            </li>
+            <li className="meta-lessons">
+              <i className="icon-file-list-4-line"></i>
+              {data.level}
             </li>
             <li className="meta-clock">
               <i className="icon-time-line"></i>

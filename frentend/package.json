@@ -23,6 +23,7 @@
     "react-on-screen": "^2.1.1",
     "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
     "sass": "^1.56.1",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"

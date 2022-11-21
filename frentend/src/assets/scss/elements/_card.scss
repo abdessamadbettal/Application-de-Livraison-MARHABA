@@ -457,12 +457,12 @@
         transition: 0.4s;
         .inner {
             display: flex;
-            // @media #{$md-layout} {
-            //     display: block;
-            // }
-            // @media #{$sm-layout} {
-            //     display: block;
-            // }
+            @media #{$md-layout} {
+                // display: block;
+            }
+            @media #{$sm-layout} {
+                // display: block;
+            }
 
             .thumbnail {
                 flex-basis: 38.33%;
@@ -475,7 +475,15 @@
                         object-fit: cover;
                         // @media #{$sm-layout} {
                             max-height: 250px;
-                        // }
+                            // }
+                            @media #{$md-layout} {
+                                // display: block;
+                            }
+                            @media #{$lg-layout} {
+                                // width: 40%;
+                            // max-height: 250px;
+                            // display: block;
+                        }
                     }
                 }
                 .top-position { 
