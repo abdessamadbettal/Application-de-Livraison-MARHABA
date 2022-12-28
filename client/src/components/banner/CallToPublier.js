@@ -19,7 +19,7 @@ const CallToPublier = () => {
                     <div className="col-lg-6">
                         <div className="newsletter-right-content d-block d-sm-flex align-items-center justify-content-start justify-content-lg-end">
                             <div className="contact-btn">
-                                <Link className="edu-btn btn-white text-decoration-none" to="#">Publier Maintenent<i className="icon-arrow-right-line-right"></i></Link>
+                                <Link className="edu-btn btn-white text-decoration-none" to="/publier">Publier Maintenent<i className="icon-arrow-right-line-right"></i></Link>
                             </div>
                             {/* <div className="contact-info">
                                 <a href="tel: +728-238-399-200"><i className="icon-phone-line"></i> +728-238-399-200</a>

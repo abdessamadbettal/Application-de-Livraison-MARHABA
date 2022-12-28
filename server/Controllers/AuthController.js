@@ -12,7 +12,7 @@ const {resetPasswordEmail , sendConfirmationEmail} = require('../Utils/SendEmail
 // method : post
 // url : /api/auth/login
 // access : public
-
+ 
 
 
 const Login = asyncHandler (async (req, res) => {
@@ -66,7 +66,7 @@ const Register =  asyncHandler (async(req,res) => {
     // check if user exist 
     const user = await User.findOne({email})
     if(user){
-        res.status(400)
+        res.status(401)
         throw new Error("Email already exist")
     } 
     const salt = await bcrypt.genSalt(10)
@@ -81,27 +81,27 @@ const Register =  asyncHandler (async(req,res) => {
         roles: '6355a36aecb9329d18d55ebf'
     })
     if(newUser){
-        if (newUser.verified == false) { 
+        // if (newUser.verified == false) { 
             sendConfirmationEmail(  
                 newUser.name, 
                 newUser.email,
                 newUser.token ,
                 newUser.id  
          ); 
-            return res.status(200).send({ 
+            return res.status(201).send({ 
               message: "Pending Account. Please Verify Your Email!",
             });
-          }
-        res.status(201).json({
-            _id: newUser._id,
-            name: newUser.name,
-            email: newUser.email,
-            verified : newUser.verified,
-            token: token ,
-            message: "User created successfully ... plaise verify your email"
-        })
+        //   }
+        // res.status(201).json({
+        //     _id: newUser._id,
+        //     name: newUser.name,
+        //     email: newUser.email,
+        //     verified : newUser.verified,
+        //     token: token ,
+        //     message: "User created successfully ... plaise verify your email"
+        // })
     } else {
-        res.status(400)
+        res.status(402)
         throw new Error("Invalid user data")
     }
 })
