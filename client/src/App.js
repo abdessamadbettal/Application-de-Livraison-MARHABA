@@ -14,6 +14,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import CourseList from "./pages/CourseList";
 import ConfirmEmail from "./components/form/ConfirmEmail";
 import PdfDetails from './pages/PdfDetails';
+import SharePdf from "./pages/SharePdf";
 function App() {
 
  
@@ -24,6 +25,8 @@ function App() {
           <Route exact path="/" element={<Home/>} />
 
           <Route exact path="/logout" element={<Home/>} />
+          <Route exact path="/publier" element={<SharePdf/>} />
+          
           <Route exact path="/biologie/cours-exmens-td-tp" element={<CourseList/>} />
           <Route exact path="/economie/cours-exmens-td-tp" element={<PdfDetails/>} />
           <Route exact path="/login-register" element={<LoginRegister/>} >

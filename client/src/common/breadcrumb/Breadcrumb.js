@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Breadcrumb = ({ title , rootUrl , parentUrl, currentUrl}) => {
     return (
-        <div className="edu-breadcrumb-area breadcrumb-style-1 ptb--60 ptb_md--40 ptb_sm--40 bg-image">
+        <div className="edu-breadcrumb-area breadcrumb-style-1 ptb--40 ptb_md--40 ptb_sm--40 bg-image">
             <div className="container eduvibe-animated-shape">
                 <div className="row">
                     <div className="col-lg-12">
