@@ -1,0 +1,31 @@
+name: frontendTesting
+run-name: ${{ github.actor }} is testing her frontend
+on: [push]
+jobs:
+  run-defined-frontend-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: npm ci
+      - run: npm run test
+        env: 
+          NODE_ENV = production
+          PORT = 8000
+          DB_HOST = localhost
+          DB_NAME = marhaba
+          DB_USER = root
+          DB_PASS =
+          MONGO_URI = mongodb+srv://abdessamad:azertyui@firstapi.wjgnfv3.mongodb.net/mernjs?retryWrites=true&w=majority
+          JWT_SECRET = 123456789
+          JWT_EXPIRE = 15m
+          EMAIL_HOST = smtp.gmail.com
+          EMAIL_PORT = 587
+          EMAIL_USER = abdessamadbattal@gmail.com
+          EMAIL_PASS =tqbjqjylcvkocjez
+          EMAIL_SECURE = true
