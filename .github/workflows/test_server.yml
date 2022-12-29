@@ -2,7 +2,7 @@ name: insall package server
 run-name: testing of the server 
 on: [push]
 jobs:
-  run-defined-frontend-tests:
+  server-testing:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -29,3 +29,16 @@ jobs:
           node-version: 18.12.1
       - run: npm i
       - run: npm test
+  client-testing:
+    runs-on: ubuntu-latest
+    needs: [server-testing]
+    defaults:
+       run:
+        working-directory: ./client
+    steps:
+        - uses: actions/checkout@v3
+        - uses: actions/setup-node@v3
+          with:
+            node-version: 18.12.1
+        - run: npm i
+    
