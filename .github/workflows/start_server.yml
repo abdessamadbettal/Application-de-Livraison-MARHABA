@@ -7,6 +7,21 @@ jobs:
     defaults:
       run:
         working-directory: ./server
+    env:
+       NODE_ENV: develepment
+       PORT: 8000
+       DB_HOST: localhost
+       DB_NAME: marhaba
+       DB_USER: root
+       DB_PASS: ''
+       MONGO_URI: mongodb+srv://abdessamad:azertyui@firstapi.wjgnfv3.mongodb.net/mernjs?retryWrites=true&w=majority
+       JWT_SECRET: 123456789
+       JWT_EXPIRE: 15m
+       EMAIL_HOST: smtp.gmail.com
+       EMAIL_PORT: 587
+       EMAIL_USER: abdessamadbattal@gmail.com
+       EMAIL_PASS: tqbjqjylcvkocjez
+       EMAIL_SECURE: true
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
