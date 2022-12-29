@@ -1,5 +1,5 @@
 name: insall package server
-run-name: ${{ github.actor }} is testing her frontend
+run-name: testing of the server 
 on: [push]
 jobs:
   run-defined-frontend-tests:
@@ -28,4 +28,4 @@ jobs:
         with:
           node-version: 18.12.1
       - run: npm ci
-      - run: npm start
+      - run: npm test
