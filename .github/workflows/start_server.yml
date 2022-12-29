@@ -28,4 +28,4 @@ jobs:
         with:
           node-version: 18.12.1
       - run: npm i
-      - run: npm test
+      - run: npm start
