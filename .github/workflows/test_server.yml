@@ -14,13 +14,13 @@ jobs:
        DB_NAME: 'marhaba'
        DB_USER: 'root'
        DB_PASS: ''
-       MONGO_URI: 'mongodb+srv://abdessamad:azertyui@firstapi.wjgnfv3.mongodb.net/mernjs?retryWrites=true&w=majority'
-       JWT_SECRET: '123456789'
+       MONGO_URI: ${{ secrets.MONGO_URI }}
+       JWT_SECRET: ${{ secrets.JWT_SECRET }}
        JWT_EXPIRE: '15m'
        EMAIL_HOST: 'smtp.gmail.com'
        EMAIL_PORT: '587'
-       EMAIL_USER: 'abdessamadbattal@gmail.com'
-       EMAIL_PASS: 'tqbjqjylcvkocjez'
+       EMAIL_USER: ${{ secrets.EMAIL_USER }}
+       EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
        EMAIL_SECURE: 'true'
     steps:
       - uses: actions/checkout@v3
