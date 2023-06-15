@@ -18,7 +18,7 @@ describe("POST /api/auth/register // REGISTER", () => {
   it("should create a user", async () => {
     const res = await request(app).post("/api/auth/register").send({
       name: "aesddsnfkjdsfk",
-      email: "sssssssssssssss@gmail.com",
+      email: "sssssbbbbsssssss@gmail.com",
       password: "azertoyuiss",
     });
     // console.log("res.body :>> ", res.body);

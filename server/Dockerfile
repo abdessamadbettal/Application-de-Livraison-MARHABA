@@ -10,7 +10,7 @@ COPY ./package.json ./
 COPY ./package-lock.json ./
 
 #installing all the dependencies that we copied 
-RUN npm install
+RUN npm install 
 
 
 #copying all the files inside the container
